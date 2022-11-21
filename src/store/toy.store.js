@@ -5,7 +5,11 @@ export const toyModule = {
     return {
       toys: [],
       currToy: '',
-      filterBy: '',
+      filterBy: {
+        name: '',
+        inStock: 'All',
+        label: 'All',
+      },
     }
   },
   mutations: {
@@ -41,16 +45,30 @@ export const toyModule = {
   getters: {
     toys({ toys, filterBy }) {
       var filteredToys = toys
-      if (!filterBy) {
+      if (
+        !filterBy.name &&
+        filterBy.label === 'All' &&
+        filterBy.inStock === 'All'
+      ) {
         filteredToys = toys
-      }
-      const regex = new RegExp(filterBy.title, 'i')
-      if (filterBy.isDone === 'all') {
-        filteredToys = toys.filter((toy) => regex.test(toy.title))
       } else {
-        filteredToys = toys.filter(
-          (toy) => regex.test(toy.title) && toy.isDone === filterBy.isDone
-        )
+        if (filterBy.inStock === 'All') {
+          filteredToys = toys
+        } else if (filterBy.inStock === true) {
+          filteredToys = toys.filter((toy) => toy.inStock)
+        }
+        if (!filterBy.inStock) {
+          filteredToys = toys.filter((toy) => !toy.inStock)
+        }
+        if (filterBy.label === 'All') {
+          filteredToys = filteredToys
+        } else {
+          filteredToys = toys.filter((toy) =>
+            toy.labels.includes(filterBy.label)
+          )
+        }
+        const regex = new RegExp(filterBy.name, 'i')
+        filteredToys = filteredToys.filter((toy) => regex.test(toy.name))
       }
       return filteredToys
     },
@@ -90,7 +108,6 @@ export const toyModule = {
         .save(toy)
         .then((savedToy) => {
           context.commit({ type: 'addToy', toy: savedToy })
-          context.dispatch({ type: 'addActivity', toy: toy, kind: 'added' })
           return savedToy
         })
         .catch((err) => {
@@ -104,11 +121,6 @@ export const toyModule = {
       return toyService
         .remove(toyId)
         .then(() => {
-          context.dispatch({
-            type: 'addActivity',
-            toy: toy,
-            kind: 'removed',
-          })
           context.commit({ type: 'removeToy', toyId })
         })
         .catch((err) => {
@@ -121,13 +133,6 @@ export const toyModule = {
         .save(toy)
         .then((updatedToy) => {
           context.commit({ type: 'updateToy', toy: updatedToy })
-          console.log(context)
-          context.dispatch({
-            type: 'addActivity',
-            toy: updatedToy,
-            kind: 'update',
-          })
-          // context.$router.push({ path: '/' })
           return updatedToy
         })
         .catch((err) => {
@@ -135,23 +140,7 @@ export const toyModule = {
           throw err
         })
     },
-    toggleToy(context, { toy }) {
-      return toyService
-        .save(toy)
-        .then((updatedToy) => {
-          context.commit({ type: 'toggleToy', toy: updatedToy })
-          context.dispatch({
-            type: 'addActivity',
-            toy: updatedToy,
-            kind: 'toggle',
-          })
-          return updatedToy
-        })
-        .catch((err) => {
-          console.log('Cannot toggle toy', err)
-          throw err
-        })
-    },
+
     getById(context, { toyId }) {
       console.log(toyId)
       return toyService

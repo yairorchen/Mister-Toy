@@ -1,8 +1,8 @@
 <script>
-import test from './components/test.vue';
+import mainHeader from './components/header.vue'
 export default{
   name:'app',
-  components:{ test},
+  components:{ mainHeader},
   data() {
     return {
       
@@ -11,6 +11,6 @@ export default{
 }
 </script>
 <template>
-  <h2>hello world</h2>
+  <main-header/>
   <router-view></router-view>
 </template>

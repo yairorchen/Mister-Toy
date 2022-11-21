@@ -44,6 +44,7 @@ function save(toy) {
   const savedToy = toyToSave._id
     ? storageService.put(STORAGE_KEY, toyToSave)
     : storageService.post(STORAGE_KEY, toyToSave)
+  console.log(savedToy)
   return Promise.resolve(savedToy)
 }
 
@@ -55,6 +56,7 @@ function getEmptyToy() {
     inStock: true,
     price: '',
     labels: [''],
+    reviews: [''],
   }
 }
 
@@ -76,5 +78,9 @@ function _createToy(name = 'waldo!') {
     price: 30,
     inStock: true,
     labels: [labels[1], labels[2]],
+    reviews: [
+      { stars: 4, txt: 'wow amazing product' },
+      { stars: 2, txt: 'sababa product' },
+    ],
   }
 }

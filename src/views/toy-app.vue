@@ -46,7 +46,7 @@ export default {
 </script>
 <template >
     <div>
-        <h1>Vue Toy app</h1>
+        <router-link to="/edit/">Add Toy</router-link>
         <toy-filter  @filter="filter"/>
         <toy-list :toys="toys" @delete="removeToy" />
     </div>

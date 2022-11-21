@@ -33,6 +33,7 @@ function get(entityType, entityId) {
 }
 
 function post(entityType, newEntity, append = true) {
+  console.log('post')
   newEntity._id = _makeId()
   return query(entityType).then((entities) => {
     append ? entities.push(newEntity) : entities.unshift(newEntity)
@@ -42,8 +43,9 @@ function post(entityType, newEntity, append = true) {
 }
 
 function put(entityType, updatedEntity) {
+  console.log('put')
   return query(entityType).then((entities) => {
-    const idx = entities.findIndex((entity) => entity._id === updatedEntity.id)
+    const idx = entities.findIndex((entity) => entity._id === updatedEntity._id)
     entities.splice(idx, 1, updatedEntity)
     _save(entityType, entities)
     return updatedEntity

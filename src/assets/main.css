@@ -2,11 +2,13 @@
 
 #app {
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-
   font-weight: normal;
 }
+
+#app>*:not(:first-child) {
+  padding: 20px;
+}
+
 
 a,
 .green {
@@ -32,4 +34,70 @@ a,
     grid-template-columns: 1fr 1fr;
     padding: 0 2rem;
   }
+}
+
+body {
+  margin: 0;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 0;
+  background-color: rgb(180, 240, 240);
+  width: 100%;
+  height: 10vh;
+  min-height: 80px;
+}
+
+input {
+  height: 47px;
+  width: 140px;
+  border-radius: 10px;
+  padding-inline-start: 20px;
+  font-size: 1.2rem;
+  border: 1;
+  margin: 20px;
+}
+
+.filter {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+}
+
+.btn {
+  border-radius: 8px;
+  border: 0;
+  width: 47px;
+  height: 40px;
+  background-color: rgba(240, 248, 255, 0);
+}
+
+.preview .btn {}
+
+.preview {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: aliceblue;
+  margin: 20px;
+  padding-inline-end: 15px;
+  border-radius: 10px;
+  box-shadow: -2px 1px 5px 0;
+}
+
+.preview>* {
+  cursor: pointer;
+}
+
+.review {
+  max-width: 300px;
+  background-color: rgb(238, 227, 213);
+  margin: 10px;
+  border-radius: 8px;
+  padding: 10px;
+
 }
