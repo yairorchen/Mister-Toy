@@ -88,13 +88,68 @@ export const toyModule = {
     isLoading({ isLoading }) {
       return isLoading
     },
+    getLabelAcc({ toys }) {
+      var labels = [
+        'On wheels',
+        'Box game',
+        'Art',
+        'Baby',
+        'Doll',
+        'Puzzle',
+        'Outdoor',
+      ]
+      var labelsAccumulator = labels.map((label) => {
+        return toys.reduce((acc, toy) => {
+          if (toy.labels.includes(label) && toy.inStock) {
+            acc++
+          }
+          return acc
+        }, 0)
+      })
+      console.log(labelsAccumulator)
+      return labelsAccumulator
+    },
+    getPriceTitle({ toys }) {
+      var labels = [
+        'On wheels',
+        'Box game',
+        'Art',
+        'Baby',
+        'Doll',
+        'Puzzle',
+        'Outdoor',
+      ]
+      var labelsAccumulator = labels.map((label) => {
+        var num = 0
+        return toys.reduce((acc, toy) => {
+          if (toy.labels.includes(label)) {
+            console.log(num)
+            if (acc === 0) {
+              acc = toy.price
+            } else {
+              acc += toy.price
+            }
+            num++
+          }
+          var average = acc / num
+          if (average) {
+            return average
+          } else return 0
+        }, 0)
+      })
+      console.log(labelsAccumulator)
+      return labelsAccumulator
+    },
   },
   actions: {
     loadToys(context) {
       context.commit({ type: 'setIsLoading', isLoading: true })
       return toyService
         .query()
-        .then((toys) => context.commit({ type: 'setToys', toys }))
+        .then((toys) => {
+          console.log('toys', toys)
+          context.commit({ type: 'setToys', toys })
+        })
         .catch((err) => {
           console.log('cannot load toys', err)
           throw err

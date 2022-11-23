@@ -1,0 +1,42 @@
+.edit-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    p{
+        font-size: 1.4rem;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+    button{
+        border-radius: 10px;
+        border: rgb(97, 198, 64) 1px solid;
+        height: 47px;
+        width:60px;
+        font-size: 1.3rem;
+        margin:20px 0 20px 0;
+    }
+    a{
+        font-size: 1.2rem;
+    }
+}
+
+
+
+.el-select {
+
+    svg {
+        height: 17px;
+        // padding-inline-start:5px;
+        :hover{
+            color: rgb(97, 198, 64);
+        }
+    }
+    .el-select__tags{
+       position:absolute;
+    }
+    .el-input{}
+    .el-input__wrapper{
+        border-radius: 10px;
+        border:rgb(97, 198, 64) 1px solid;
+    }
+}

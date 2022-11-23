@@ -1,4 +1,5 @@
 import { utilService } from '../services/util.service'
+import { httpService } from '../services/http-service'
 import { storageService } from '../services/async-storage.service'
 
 export default {
@@ -10,6 +11,8 @@ export default {
 }
 
 const STORAGE_KEY = 'toysDB'
+const TOY_URL = 'toy/'
+
 const labels = [
   'On wheels',
   'Box game',
@@ -20,32 +23,39 @@ const labels = [
   'Outdoor',
 ]
 
-var gToys = _createToys()
-console.log(gToys)
+// var gToys = _createToys()
+// console.log(gToys)
 
 function query() {
-  const toys = storageService.query(STORAGE_KEY)
-  return toys
+  return httpService.get(TOY_URL)
+  // return httpService.get(TOY_URL, filterBy)
+  // const toys = storageService.query(STORAGE_KEY)
+  // return toys
 }
 
 function getById(id) {
-  const currToy = storageService.get(STORAGE_KEY, id)
-  console.log(currToy)
-  return Promise.resolve(currToy)
+  return httpService.get(TOY_URL + id)
+  // const currToy = storageService.get(STORAGE_KEY, id)
+  // console.log(currToy)
+  // return Promise.resolve(currToy)
 }
 
 function remove(id) {
-  storageService.remove(STORAGE_KEY, id)
-  return Promise.resolve()
+  return httpService.delete(TOY_URL + id)
+  // storageService.remove(STORAGE_KEY, id)
+  // return Promise.resolve()
 }
 
 function save(toy) {
-  const toyToSave = JSON.parse(JSON.stringify(toy))
-  const savedToy = toyToSave._id
-    ? storageService.put(STORAGE_KEY, toyToSave)
-    : storageService.post(STORAGE_KEY, toyToSave)
-  console.log(savedToy)
-  return Promise.resolve(savedToy)
+  if (toy._id) return httpService.put(TOY_URL + toy._id, toy)
+  return httpService.post(TOY_URL, toy)
+
+  // const toyToSave = JSON.parse(JSON.stringify(toy))
+  // const savedToy = toyToSave._id
+  //   ? storageService.put(STORAGE_KEY, toyToSave)
+  //   : storageService.post(STORAGE_KEY, toyToSave)
+  // console.log(savedToy)
+  // return Promise.resolve(savedToy)
 }
 
 function getEmptyToy() {

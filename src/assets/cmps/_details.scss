@@ -1,0 +1,34 @@
+.details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   h3{font-size: 1.5rem;} 
+   p{font-size: 1rem;}
+   .categories{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    &>*{
+        margin: 10px;
+    }
+   }
+}
+
+.el-rate {
+    svg {
+        height: 30px;
+    }
+}
+.reviews{
+    max-width: 100%;
+        display: grid;
+            grid-template-columns: repeat(auto-fit, 200px);
+}
+.review {
+    max-width: 300px;
+    background-color: rgb(238, 227, 213);
+    margin: 10px;
+    border-radius: 8px;
+    padding: 10px;
+
+}

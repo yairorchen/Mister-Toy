@@ -11,6 +11,8 @@ export default{
 }
 </script>
 <template>
+  <div class="main-layout"> 
   <main-header/>
   <router-view></router-view>
+  </div>
 </template>

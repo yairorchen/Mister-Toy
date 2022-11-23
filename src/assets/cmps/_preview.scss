@@ -1,0 +1,25 @@
+.list-container{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, 280px);
+
+}
+
+.preview {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: aliceblue;
+    margin: 20px;
+    padding-inline-end: 15px;
+    border-radius: 10px;
+    box-shadow: -2px 1px 5px 0;
+    cursor: pointer;
+
+    .btn:hover {
+        color: red
+    }
+    :first-child{
+        align-self: flex-start;
+    }
+    
+}

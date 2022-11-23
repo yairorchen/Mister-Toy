@@ -46,7 +46,11 @@ export default {
 </script>
 <template >
     <div>
+        <div class="prev-links">
         <router-link to="/edit/">Add Toy</router-link>
+        <router-link to="/dashboard/">dashboard</router-link>
+        <router-link to="/shops/">Shops Locations</router-link>
+        </div>
         <toy-filter  @filter="filter"/>
         <toy-list :toys="toys" @delete="removeToy" />
     </div>

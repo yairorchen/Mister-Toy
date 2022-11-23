@@ -1,6 +1,6 @@
-<template lang="">
-    <div>
-        <h1>edit</h1>
+<template>
+    <div class="edit-container">
+        <h1>Edit</h1>
         <form @submit.prevent="updateToy()">
         <p>name:</p>
         <input  type="text" placeholder="name" v-model="updatedToy.name" />
@@ -9,25 +9,21 @@
         <p>in stock:</p>
         <input  type="text" placeholder="price" v-model="updatedToy.inStock" />
         <p>categories:</p>
-            <select name="labels" id="labels" multiple v-model="updatedToy.labels">
-                <option value="On wheels">On wheels</option>
-                <option value="Box game">Box game</option>
-                <option value="Art">Art</option>
-                <option value="Baby">Baby</option>
-                <option value="Doll">Doll</option>
-                <option value="Puzzle">Puzzle</option>
-                <option value="Outdoor">Outdoor</option>
-                </select>
-        <h3 v-for="label in updatedToy.labels">
-            <p> {{label}}</p>
-        </h3>
+
+        <el-select v-model="updatedToy.labels" multiple placeholder="Select" style="width: 240px">
+            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
+        </el-select>
         <button>save</button>
         </form>
         <router-link to="/toy/">Back</router-link>
+        
     </div>
 </template>
 <script>
+// import labelSelect from '../components/select.vue';
+
 export default {
+    components: {},
     created() {
         this.getToyById()
         // this.todo = todoService.getById(id)
@@ -35,7 +31,36 @@ export default {
     data() {
         return {
             toyId:'',
-            updatedToy:{name:'',price:'',inStock:'',labels:'',}
+            updatedToy:{name:'',price:'',inStock:'',labels:'',},
+            options: [
+                {
+                    value: 'On wheels',
+                    label: 'On wheels',
+                },
+                {
+                    value: 'Box game',
+                    label: 'Box game',
+                },
+                {
+                    value: 'Art',
+                    label: 'Art',
+                },
+                {
+                    value: 'Baby',
+                    label: 'Baby',
+                },
+                {
+                    value: 'Doll',
+                    label: 'Doll',
+                }, {
+                    value: 'Puzzle',
+                    label: 'Puzzle',
+                }, {
+                    value: 'Outdoor',
+                    label: 'Outdoor',
+                },
+            ]
+           
         }
     },
     methods: {
@@ -78,3 +103,10 @@ export default {
 <style lang="">
     
 </style>
+
+
+
+
+   
+
+

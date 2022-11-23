@@ -1,6 +1,6 @@
 
 <template lang="">
-    <div>
+    <div class="list-container">
         <div class="preview" v-for="toy in toys">
                 <button class="btn" @click="deleteToy(toy._id)">X</button>
                 

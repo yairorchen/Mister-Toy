@@ -1,0 +1,47 @@
+* {
+  box-sizing: border-box;
+  font-weight: normal;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+}
+
+body {
+  margin: 0;
+  background-color:rgb(217, 217, 240) ;
+}
+
+
+
+
+input {
+  min-height: 47px;
+  border-radius: 7px;
+  font-size: 1rem;
+  border: 1px rgb(97, 198, 64) solid;
+  padding-inline-start: 10px;
+}
+
+
+.btn {
+  border-radius: 8px;
+  border: 0;
+  width: 47px;
+  height: 40px;
+  background-color: rgba(240, 248, 255, 0);
+}
+
+.prev-links {
+  display: flex;
+  justify-content: space-between;
+
+  &>* {
+    margin-inline-start: 10px;
+    font-family: Bahnschrift;
+  }
+
+}
